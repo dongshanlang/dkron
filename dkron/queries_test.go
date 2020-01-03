@@ -45,7 +45,7 @@ func TestRunQuery(t *testing.T) {
 	err = a.Store.SetJob(j1, false)
 	require.NoError(t, err)
 
-	a.sched.Start([]*Job{j1})
+	a.sched.Start([]*Job{j1}, a)
 
 	_, err = a.RunQuery("test_job", &Execution{})
 	assert.NoError(t, err)
