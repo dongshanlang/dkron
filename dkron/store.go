@@ -51,7 +51,7 @@ func NewStore(dir string) (*Store, error) {
 	}
 	if !dirExists {
 		// Try to create the directory
-		err := os.Mkdir(dir, 0700)
+		err := os.MkdirAll(dir, 0700)
 		if err != nil {
 			return nil, fmt.Errorf("Error creating directory %s: %w", dir, err)
 		}
