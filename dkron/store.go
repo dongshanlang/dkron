@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"sort"
 	"sync"
 	"time"
@@ -44,6 +45,18 @@ type JobOptions struct {
 
 // NewStore creates a new Storage instance.
 func NewStore(dir string) (*Store, error) {
+	dirExists, err := exists(dir)
+	if err != nil {
+		return nil, fmt.Errorf("Ivalid directory %s: %w", dir, err)
+	}
+	if !dirExists {
+		// Try to create the directory
+		err := os.Mkdir(dir, 0700)
+		if err != nil {
+			return nil, fmt.Errorf("Error creating directory %s: %w", dir, err)
+		}
+	}
+
 	opts := badger.DefaultOptions(dir).
 		WithLogger(log)
 

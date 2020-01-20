@@ -453,17 +453,6 @@ func (a *Agent) StartServer() {
 	}
 
 	if a.Store == nil {
-		dirExists, err := exists(a.config.DataDir)
-		if err != nil {
-			log.WithError(err).WithField("dir", a.config.DataDir).Fatal("Invalid Dir")
-		}
-		if !dirExists {
-			// Try to create the directory
-			err := os.Mkdir(a.config.DataDir, 0700)
-			if err != nil {
-				log.WithError(err).WithField("dir", a.config.DataDir).Fatal("Error Creating Dir")
-			}
-		}
 		s, err := NewStore(filepath.Join(a.config.DataDir, a.config.NodeName))
 		if err != nil {
 			log.WithError(err).Fatal("dkron: Error initializing store")
