@@ -40,6 +40,7 @@ func TestSchedule(t *testing.T) {
 
 	assert.True(t, sched.Started)
 	assert.Len(t, sched.Cron.Entries(), 1)
+	sched.Stop()
 }
 
 func TestTimezoneAwareJob(t *testing.T) {
@@ -56,4 +57,5 @@ func TestTimezoneAwareJob(t *testing.T) {
 
 	assert.True(t, sched.Started)
 	assert.Len(t, sched.Cron.Entries(), 1)
+	sched.Stop()
 }
