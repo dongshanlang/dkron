@@ -31,7 +31,8 @@ func TestRunQuery(t *testing.T) {
 	c.BootstrapExpect = 1
 
 	a := NewAgent(c)
-	a.Start()
+	err = a.Start()
+	require.NoError(t, err)
 	time.Sleep(2 * time.Second)
 
 	// Test error with no job
@@ -49,4 +50,6 @@ func TestRunQuery(t *testing.T) {
 
 	_, err = a.RunQuery("test_job", &Execution{})
 	assert.NoError(t, err)
+
+	a.Stop()
 }

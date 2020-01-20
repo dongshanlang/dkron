@@ -108,9 +108,10 @@ func Test_isRunnable(t *testing.T) {
 	require.NoError(t, err)
 	defer os.RemoveAll(dir)
 
-	a := &Agent{}
 	s, err := NewStore(dir)
-	a.Store = s
+	a := &Agent{
+		Store: s,
+	}
 	defer s.Shutdown()
 	require.NoError(t, err)
 
